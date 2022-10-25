@@ -8,6 +8,20 @@ describe('the Maybe', () => {
     const thisShouldNotHappen = () => fail('this should not happen');
     const otherValue = faker.lorem.sentence();
 
+    describe('with one less layer of indirection', () => {
+        const thing = 'THING';
+        const someThing = some(thing);
+        test('for SOMETHING should not provide the fallback value', () => {
+            expect(someThing.orElse(otherValue)).toBe(thing);
+        });
+
+        test(`map: for SOMETHING is  .. } `, () => {
+            expect(someThing.map(inner => `${inner} is transformed`).orElse(null))
+                .toEqual(`${thing} is transformed`);
+        });
+    });
+
+
     const testSomething = <T>(maybeValue: Maybe<T>, expected: T) => {
         describe('something', () => {
             describe('why it is a monad', () => {
@@ -34,7 +48,7 @@ describe('the Maybe', () => {
             test.skip(`toResult: for SOMETHING is ${maybeValue.inspect?.()} should be a Success`, () =>
                 expect(maybeValue.toResult?.().isSuccess).toEqual(true));
         });
-    };
+    };  
 
     testSomething(some(SOMETHING), SOMETHING);
 
