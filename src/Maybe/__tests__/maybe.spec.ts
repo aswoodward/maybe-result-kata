@@ -11,12 +11,12 @@ describe('the Maybe', () => {
     const testSomething = <T>(maybeValue: Maybe<T>, expected: T) => {
         describe('something', () => {
             describe('why it is a monad', () => {
-                test.skip('orElse: for SOMETHING should not provide the fallback value', () =>
+                test('orElse: for SOMETHING should not provide the fallback value', () =>
                     expect(maybeValue.orElse(otherValue)).toBe(expected));
 
-                test.skip(`map: for SOMETHING is ${maybeValue.inspect?.()} `, () =>
-                    expect(maybeValue.map(inner => `${inner} ${SOMETHING}`).orElse(otherValue))
-                        .toEqual(`${expected} ${SOMETHING}`));
+                test(`map: for SOMETHING is ${maybeValue.inspect?.()} `, () =>
+                    expect(maybeValue.map(inner => `${inner} is transformed and bound in a monad`).orElse(otherValue))
+                        .toEqual(`${expected} is transformed and bound in a monad`));
 
                 describe('mBind: for SOMETHING ', () => {
                     test.skip('should allow us to migrate to a different something', () =>

@@ -4,8 +4,8 @@ import {Maybe, Nothing, Some} from "./types";
 const some = <T>(thing: T): Some<T> => ({
     isNothing: undefined,
     orNull: () => undefined,
-    orElse: () => undefined,
-    map: () => undefined,
+    orElse: () => thing,
+    map: (f: (arg: T) => any) => some(f(thing)),
     mBind: () => undefined,
     or: () => undefined,
     toResult: () => undefined,
